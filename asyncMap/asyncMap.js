@@ -38,6 +38,26 @@
  *
  */
 
+// var asyncMap = function(tasks, callback) {
+// };
+const asyncMap = (tasks, callback) => {
+  // initial 'results' to an array for storing return values from all tasks
+  let results = [];
+  // initial 'finished' to tatle number of takes for tracking how many tasks have finished
+  let finished = tasks.length;
 
-var asyncMap = function(tasks, callback) {
+  // iterate over the tasks with forEach, this is the 'functional programming style'
+  tasks.forEach((task, i) => {
+    // invoke the current task and provide a callback instruction to the task that specifies how to handle the result of the task
+    task(result => {
+      // stroe the result of the task at results[i]
+      results[i] = result;
+      // keep tracking the number of finished tasks
+      finished--;
+      // only once all tasks have been finished, we excute the callback function in order
+      if (finished === 0) {
+        callback(results);
+      }
+    })
+  })
 };
