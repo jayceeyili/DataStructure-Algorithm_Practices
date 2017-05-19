@@ -10,5 +10,23 @@
  */
 
 // Solved in O(n) time with O(1) memory
-var sumArray = function(array) {
+// var sumArray = function(array) {
+// };
+const sumArray = array => {
+  let max = null;
+  let currentSum = 0;
+
+  array.forEach(ele => {
+    currentSum += ele;
+
+    if (currentSum > max || !max) {
+      max = currentSum;
+    }
+
+    if (currentSum < 0) {
+      currentSum = 0;
+    }
+  })
+
+  return max;
 };
