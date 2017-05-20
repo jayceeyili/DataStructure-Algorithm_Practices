@@ -20,9 +20,28 @@
  *
  */
 
-var nthFibonacci = function (n) {
-  // TODO: implement me!
+// var nthFibonacci = function (n) {
+//   // TODO: implement me!
+// };
+
+const nthFibonacci = n => {
+  if (n === 1) {
+    return 0;
+  }
+
+  if (n === 2) {
+    return 1;
+  }
+
+  let fibs = [0, 1];
+  let i = 0;
+
+  while (fibs.length <= n) {
+    fibs.push(fibs[i] + fibs[i + 1]);
+    i++;
+  }
+
+  return fibs[n];
 };
 
-
-
+// console.log(nthFibonacci(6));
