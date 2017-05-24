@@ -23,7 +23,28 @@
  *
  *
  */
-var balancedParens = function(input) {
+// var balancedParens = function(input) {
+// };
+
+const balancedParens = input => {
+  const pair = {
+    '(': ')',
+    '[': ']',
+    '{': '}'
+  }
+
+  let stack = [];
+
+  for (var i = 0; i < input.length; i++) {
+    let char = input[i];
+    if (pair[char]) {
+      stack.push(char);
+    } else if (Object.values(pair).includes(char)) {
+      if (pair[stack.pop()] !== char) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
 };
-
-
