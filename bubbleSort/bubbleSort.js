@@ -36,6 +36,23 @@ var i;
 // Feel free to add helper functions if needed.
 
 
-var bubbleSort = function(array) {
-  // Your code here.
+// var bubbleSort = function(array) {
+//   // Your code here.
+// };
+
+const bubbleSort = array => {
+  let sorted = false;
+
+  while (!sorted) {
+    sorted = true;
+
+    for (let k = 0; k < array.length; k++) {
+      if (array[k] > array[k + 1]) {
+        [array[k], array[k + 1]] = [array[k + 1], array[k]];
+        sorted = false;
+      }
+    }
+  }
+
+  return array;
 };
