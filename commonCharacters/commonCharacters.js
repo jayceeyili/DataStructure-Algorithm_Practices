@@ -12,6 +12,23 @@
 
 
 
-var commonCharacters = function(string1, string2) {
-  // TODO: Your code here!
+// var commonCharacters = function(string1, string2) {
+//   // TODO: Your code here!
+// };
+
+const commonCharacters = (string1, string2) => {
+  let result = '';
+
+  for (let i = 0; i < string1.length; i++) {
+    let chr = string1[i];
+    if (result.indexOf(chr) === -1) {
+      if (string2.indexOf(chr) !== -1) {
+        result += chr;
+      }
+    }
+  }
+
+  return result;
 };
+
+console.log(commonCharacters('acexivou', 'aegihobu'));
