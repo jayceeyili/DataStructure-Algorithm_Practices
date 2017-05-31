@@ -1,28 +1,30 @@
 /**
- * Write a function `f(a, b)` which takes two strings as arguments and returns a
- * string containing the characters found in both strings (without duplication), in the
- * order that they appeared in `a`. Remember to skip spaces and characters you
- * have already encountered!
- *
- * Example: commonCharacters('acexivou', 'aegihobu')
- * Returns: 'aeiou'
- *
- * Extra credit: Extend your function to handle more than two input strings.
- */
-
-
+* Write a function `f(a, b)` which takes two strings as arguments and returns a
+* string containing the characters found in both strings (without duplication), in the
+* order that they appeared in `a`. Remember to skip spaces and characters you
+* have already encountered!
+*
+* Example: commonCharacters('acexivou', 'aegihobu')
+* Returns: 'aeiou'
+*
+* Extra credit: Extend your function to handle more than two input strings.
+*/
 
 // var commonCharacters = function(string1, string2) {
 //   // TODO: Your code here!
 // };
 
-const commonCharacters = (string1, string2) => {
+const commonCharacters = (...strings) => {
   let result = '';
+  let base = strings[0];
+  let rest = strings.slice(1);
+  let contain = false;
 
-  for (let i = 0; i < string1.length; i++) {
-    let chr = string1[i];
+  for (let c = 0; c < base.length; c++) {
+    let chr = base[c];
+
     if (result.indexOf(chr) === -1) {
-      if (string2.indexOf(chr) !== -1) {
+      if (rest.every(string => string.indexOf(chr) !== -1)) {
         result += chr;
       }
     }
@@ -30,5 +32,3 @@ const commonCharacters = (string1, string2) => {
 
   return result;
 };
-
-console.log(commonCharacters('acexivou', 'aegihobu'));
