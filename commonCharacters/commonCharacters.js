@@ -16,19 +16,18 @@
 
 const commonCharacters = (...strings) => {
   let result = '';
-  let base = strings[0];
+  let base = strings[0].split('');
   let rest = strings.slice(1);
-  let contain = false;
 
-  for (let c = 0; c < base.length; c++) {
-    let chr = base[c];
-
+  base.forEach(chr => {
     if (result.indexOf(chr) === -1) {
       if (rest.every(string => string.indexOf(chr) !== -1)) {
         result += chr;
       }
     }
-  }
+  })
 
   return result;
 };
+
+// console.log(commonCharacters('acexivou', 'aegihobu', 'adgfid', 'fgacvi'));
