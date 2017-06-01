@@ -11,5 +11,24 @@
   * don't worry about handling cyclical object structures.
   *
   */
-var deepEquals = function(apple, orange) {
-};
+// var deepEquals = function(apple, orange) {
+// };
+
+const deepEquals = (apple, orange) => {
+  if (apple === orange) return true;
+  if (!(apple instanceof Object) || !(orange instanceof Object)) return false;
+
+  let appleKeys = Object.keys(apple);
+  let appleLength = appleKeys.length;
+  let orangeKeys = Object.keys(orange);
+  let orangeLength = orangeKeys.length;
+
+  if (appleLength !== orangeLength) return false;
+  if (appleLength === 0) return true;
+
+  for (let i = 0; i < appleLength; i++) {
+    if(!deepEquals(apple[appleKeys[i]], orange[appleKeys[i]])) return false;
+  }
+
+  return true;
+}
