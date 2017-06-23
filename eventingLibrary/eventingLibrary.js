@@ -20,7 +20,34 @@
  * - It is not necessary to write a way to remove listeners.
  */
 
-var mixEvents = function(obj) {
-  // TODO: Your code here
+// var mixEvents = function(obj) {
+//   // TODO: Your code here
+//   return obj;
+// };
+
+const mixEvents = obj => {
+  let events = {};
+
+  obj.on = (event, callback) => {
+    events[event] = events[event] || [];
+    events[event].push(callback);
+  }
+
+  obj.trigger = event => {
+    if (events[event]) {
+      let args = Array.prototype.slice.call(arguments, 1);
+
+      events[event].forEach(callback => callback.apply(obj, args));
+    }
+  }
+
   return obj;
 };
+
+//
+// var obj = mixEvents({ name: 'Alice', age: 30 });
+// obj.on('ageChange', function(){ // On takes an event name and a callback function
+//    console.log('Age changed');
+// });
+// obj.age++;
+// obj.trigger('ageChange'); // This should call our callback! Should log 'age changed'.
