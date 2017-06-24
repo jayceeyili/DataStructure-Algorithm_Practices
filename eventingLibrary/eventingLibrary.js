@@ -33,21 +33,19 @@ const mixEvents = obj => {
     events[event].push(callback);
   }
 
-  obj.trigger = event => {
-    if (events[event]) {
-      let args = Array.prototype.slice.call(arguments, 1);
-
-      events[event].forEach(callback => callback.apply(obj, args));
+  obj.trigger = (...args) => {
+    if (events[args[0]]) {
+      events[args[0]].forEach(callback => callback.apply(obj, args.slice(1)));
     }
   }
 
   return obj;
 };
 
-//
 // var obj = mixEvents({ name: 'Alice', age: 30 });
 // obj.on('ageChange', function(){ // On takes an event name and a callback function
 //    console.log('Age changed');
 // });
 // obj.age++;
 // obj.trigger('ageChange'); // This should call our callback! Should log 'age changed'.
+// console.log(obj.age);
