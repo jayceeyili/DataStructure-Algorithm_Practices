@@ -12,35 +12,56 @@
  *
  */
 
-var toFraction = function(number) {
-  var isNegative = false;
-  var numerator = 0;
-  var denominator = 1;
+// var toFraction = function(number) {
+//   var isNegative = false;
+//   var numerator = 0;
+//   var denominator = 1;
+//
+//   if(number < 0) {
+//     isNegative = true;
+//     number = Math.abs(number);
+//   }
+//
+//   var fraction = function(){
+//     for(var i=0;i<=10;i++){
+//       for(var j=1;j<=10;j++){
+//         if(i/j === number){
+//           numerator = i;
+//           denominator = j;
+//           return;
+//         }
+//       }
+//     }
+//   };
+//
+//   fraction();
+//
+//   var result = numerator + "/" + denominator;
+//
+//   if(isNegative) {
+//     result = "-" + result;
+//   }
+//
+//   return result;
+// };
 
-  if(number < 0) {
-    isNegative = true;
-    number = Math.abs(number);
-  }
+const toFraction = number => {
+  let isNegative = number < 0;
+  number = Math.abs(number);
+  let numerator, denominator, result;
 
-  var fraction = function(){
-    for(var i=0;i<=10;i++){
-      for(var j=1;j<=10;j++){
-        if(i/j === number){
-          numerator = i;
-          denominator = j;
-          return;
-        }
+  for (let i = 0; i <= 10; i++) {
+    for (let j = 1; j <= 10; j++) {
+      if (i / j === number) {
+        numerator = i;
+        denominator = j;
+        result = numerator + '/' + denominator;
+        return isNegative ? '-' + result : result;
       }
     }
-  };
-
-  fraction();
-
-  var result = numerator + "/" + denominator;
-
-  if(isNegative) {
-    result = "-" + result;
   }
-
-  return result;
 };
+
+// console.log(toFraction(0.5) === '1/2');
+// console.log(toFraction(3.0) === '3/1');
+// console.log(toFraction(2.5) === '5/2');
