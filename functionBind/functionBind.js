@@ -34,7 +34,7 @@
 //   }
 // };
 
-const bind = (...args1) => (...args2) => args1[0].apply(args1[1], args1.slice(2).concat(args2));
+const bind = (...args1) => (...args2) => args1[0].apply(args1[1], [...args1.slice(2), ...args2]);
 
 // var alice = {
 //   name: 'alice',
@@ -84,13 +84,13 @@ Function.prototype.bind = function(context) {
   }
 };
 
-// var alice = {
-//   name: 'alice',
-//   shout: function(){
-//     console.log(this.name);
-//   }
-// }
-// var boundShout = alice.shout.bind(alice);
-// boundShout(); // alerts 'alice'
-// boundShout = alice.shout.bind({name: 'bob'});
-// boundShout(); // alerts 'bob'
+var alice = {
+  name: 'alice',
+  shout: function(){
+    console.log(this.name);
+  }
+}
+var boundShout = alice.shout.bind(alice);
+boundShout(); // alerts 'alice'
+boundShout = alice.shout.bind({name: 'bob'});
+boundShout(); // alerts 'bob'
