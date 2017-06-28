@@ -23,16 +23,18 @@
  *
 */
 
-var bind = function(func, context) {
-  var prevArgs = Array.prototype.slice.call(arguments, 2);
+// var bind = function(func, context) {
+//   var prevArgs = Array.prototype.slice.call(arguments, 2);
+//
+//   return function() {
+//     var args = Array.prototype.slice.call(arguments);
+//     args = prevArgs.concat(args);
+//
+//     return func.apply(context, args);
+//   }
+// };
 
-  return function() {
-    var args = Array.prototype.slice.call(arguments);
-    args = prevArgs.concat(args);
-
-    return func.apply(context, args);
-  }
-};
+const bind = (...args1) => (...args2) => args1[0].apply(args1[1], args1.slice(2).concat(args2));
 
 // var alice = {
 //   name: 'alice',
