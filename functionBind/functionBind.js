@@ -23,10 +23,27 @@
  *
 */
 
-var bind = function(
-) {
-  // TODO: Your code here
+var bind = function(func, context) {
+  var prevArgs = Array.prototype.slice.call(arguments, 2);
+
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    args = prevArgs.concat(args);
+
+    return func.apply(context, args);
+  }
 };
+
+// var alice = {
+//   name: 'alice',
+//   shout: function(){
+//     console.log(this.name);
+//   }
+// }
+// var boundShout = bind(alice.shout, alice);
+// boundShout(); // alerts 'alice'
+// boundShout = bind(alice.shout, {name: 'bob'});
+// boundShout(); // alerts 'bob'
 
 /*
  * Function.prototype.bind:
@@ -53,7 +70,25 @@ var bind = function(
  *
 */
 
-Function.prototype.bind = function(
-) {
-  // TODO: Your code here
+Function.prototype.bind = function(context) {
+  var prevArgs = Array.prototype.slice.call(arguments, 1);
+  var func = this;
+
+  return function() {
+    var args = Array.prototype.slice.call(arguments);
+    args = prevArgs.concat(args);
+
+    return func.apply(context, args);
+  }
 };
+
+// var alice = {
+//   name: 'alice',
+//   shout: function(){
+//     console.log(this.name);
+//   }
+// }
+// var boundShout = alice.shout.bind(alice);
+// boundShout(); // alerts 'alice'
+// boundShout = alice.shout.bind({name: 'bob'});
+// boundShout(); // alerts 'bob'
