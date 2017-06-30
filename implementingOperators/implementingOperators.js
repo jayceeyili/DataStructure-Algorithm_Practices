@@ -10,9 +10,19 @@
 // Terror mode: Re-implement all three functions using only bitwise operators.
 
 
-var multiply = function(x, y) {
-  // TODO: should return the product of x * y
+// var multiply = function(x, y) {
+//   // TODO: should return the product of x * y
+// };
+const multiply = (x, y) => {
+  let result = 0;
+  for (let i = 0; i < y; i++) {
+    result += x;
+  }
+
+  return result;
 };
+
+console.log(multiply(2, 2));
 
 var divide = function(x, y) {
   // TODO: should return the quotient of x / y
@@ -21,5 +31,3 @@ var divide = function(x, y) {
 var modulo = function(x, y) {
   // TODO: should return the remainder of x / y
 };
-
-
