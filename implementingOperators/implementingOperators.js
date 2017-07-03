@@ -9,25 +9,65 @@
 //
 // Terror mode: Re-implement all three functions using only bitwise operators.
 
-
-// var multiply = function(x, y) {
-//   // TODO: should return the product of x * y
-// };
 const multiply = (x, y) => {
+  if (x === 0 || y === 0) {
+    return 0;
+  }
+
+  let isNegative = x < 0 ^ y < 0;
   let result = 0;
+  x = Math.abs(x);
+  y = Math.abs(y);
+
   for (let i = 0; i < y; i++) {
     result += x;
   }
 
-  return result;
+  return isNegative ? 0 - result : result;
 };
 
-console.log(multiply(2, 2));
+// console.log(multiply(-3, 2));
 
-var divide = function(x, y) {
-  // TODO: should return the quotient of x / y
+const divide = (x, y) => {
+  if (x === 0) {
+    return 0;
+  }
+  if (y === 0) {
+    throw Error('Denominator cannot be Zero');
+  }
+
+  let isNegative = x < 0 ^ y < 0;
+  let result = 0;
+  x = Math.abs(x);
+  y = Math.abs(y);
+
+  while (x - y >= 0) {
+    x -= y;
+    result++;
+  }
+
+  return isNegative ? 0 - result : result;
 };
 
-var modulo = function(x, y) {
-  // TODO: should return the remainder of x / y
+// console.log(divide(-11, 2));
+
+const modulo = (x, y) => {
+  if (x === 0) {
+    return 0;
+  }
+  if (y === 0) {
+    throw Error('Denominator cannot be Zero');
+  }
+
+  let isNegative = x < 0 ^ y < 0;
+  x = Math.abs(x);
+  y = Math.abs(y);
+
+  while (x - y >= 0) {
+    x -= y;
+  }
+
+  return isNegative ? 0 - x : x;
 };
+
+console.log(modulo(9, 6));
