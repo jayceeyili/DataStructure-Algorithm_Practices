@@ -45,10 +45,9 @@ const bubbleSort = array => {
 
   while (!sorted) {
     sorted = true;
-
-    for (let k = 0; k < array.length; k++) {
-      if (array[k] > array[k + 1]) {
-        [array[k], array[k + 1]] = [array[k + 1], array[k]];
+    for (var i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        [array[i], array[i + 1]] = [array[i + 1], array[i]];
         sorted = false;
       }
     }
@@ -56,3 +55,5 @@ const bubbleSort = array => {
 
   return array;
 };
+
+// console.log(bubbleSort([2, 1, 3]));
