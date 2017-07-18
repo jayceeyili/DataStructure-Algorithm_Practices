@@ -41,19 +41,21 @@
 // };
 
 const characterFrequency = string => {
-  let freqMap = string.split('').reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
+  let OccurMap = string.split('').reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
   let result = [];
-  for (let char in freqMap) {
-    result.push([char, freqMap[char]]);
+  for (let key in OccurMap) {
+    result.push([key, OccurMap[key]]);
   }
 
   result.sort((a, b) => {
-    if (a[1] > b[1]) return -1;
     if (a[1] < b[1]) return 1;
+    if (a[1] > b[1]) return -1;
     if (a[0] > b[0]) return 1;
     if (a[0] < b[0]) return -1;
     return 0;
-  });
+  })
 
   return result;
 };
+
+console.log(characterFrequency('mississippi'));
