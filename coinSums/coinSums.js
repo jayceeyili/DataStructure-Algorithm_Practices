@@ -33,20 +33,15 @@ const coins = [1, 2, 5, 10, 20, 50, 100, 200];
 const makeChange = total => {
   let result = 0;
 
-  let find = (sum, index) => {
-    if (sum === total) {
-      result++;
-      return;
-    }
-
-    if (sum > total) {
-      return;
-    }
-
+  const find = (sum, index) => {
+    if (sum === total) return result++;
+    if (sum > total) return;
     coins.forEach((ele, i) => find(sum + ele, i));
-  };
+  }
 
   find(0, 0);
 
   return result;
 };
+
+// console.log(makeChange(20));
