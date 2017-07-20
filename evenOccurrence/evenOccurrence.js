@@ -14,10 +14,8 @@
 //   // Your code here.
 // };
 const evenOccurrence = arr => {
-  let occurs = arr.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
-  let result = arr.find(n => occurs[n] > 1);
-  
-  return result ? result : null;
+  const countMap = arr.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a;}, {});
+  return arr.find(ele => countMap[ele] > 1) || null;
 };
 
-console.log(evenOccurrence([1, 7, 7, 2, 4, 5, 6, 8, 9, 6, 4]));
+console.log(evenOccurrence([1, 7, 2, 4, 5, 6, 8, 9, 6, 4]));
