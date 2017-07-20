@@ -24,11 +24,18 @@ const deepEquals = (apple, orange) => {
   let orangeLength = orangeKeys.length;
 
   if (appleLength !== orangeLength) return false;
-  if (appleLength === 0) return true;
-
-  for (let i = 0; i < appleLength; i++) {
-    if(!deepEquals(apple[appleKeys[i]], orange[appleKeys[i]])) return false;
-  }
+  // appleKeys.forEach(key => {
+  //   if (!deepEquals(apple[key], orange[key])) return false;
+  // })
+  // we cannot use forEach function here because there is no way to stop the loop using return key word
+  // instead, a plain for loop is a better choise;
+  // for (let i = 0; i < appleLength; i++) {
+  //   let key = appleKeys[i];
+  //   if(!deepEquals(apple[key], orange[key])) return false;
+  // }
 
   return true;
-}
+};
+
+console.log(deepEquals({a:1, b: {c:3}},{a:1, b: {c:3}})); // true
+console.log(deepEquals({a:1, b: {c:5}},{a:1, b: {c:6}})); // false
