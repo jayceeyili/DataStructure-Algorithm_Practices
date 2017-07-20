@@ -39,9 +39,9 @@
 // var pipe = function() {
 // };
 
-const compose = (...functions) => input => functions.reduceRight((a, b) => b(a), input);
+const compose = (...funcs) => input => funcs.reduceRight((a, b) => b(a), input);
 
-const pipe = (...functions) => input => functions.reduce((a, b) => b(a), input);
+const pipe = (...funcs) => input => funcs.reduce((a, b) => b(a), input);
 
 // var greet = function(name){ return 'hi: ' + name;}
 // var exclaim = function(statement) { return statement.toUpperCase() + '!';}
