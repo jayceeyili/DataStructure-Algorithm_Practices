@@ -16,12 +16,12 @@
 
 const commonCharacters = (...strings) => {
   let result = '';
-  let base = strings[0].split('');
+  let head = strings[0];
   let rest = strings.slice(1);
 
-  base.forEach(chr => {
+  head.split('').forEach(chr => {
     if (result.indexOf(chr) === -1) {
-      if (rest.every(string => string.indexOf(chr) !== -1)) {
+      if (rest.every(word => word.indexOf(chr) !== -1)) {
         result += chr;
       }
     }
@@ -30,4 +30,4 @@ const commonCharacters = (...strings) => {
   return result;
 };
 
-// console.log(commonCharacters('acexivou', 'aegihobu', 'adgfid', 'fgacvi'));
+// console.log(commonCharacters('acexivou', 'aegihoebu', 'adgfide', 'fgacvei'));
