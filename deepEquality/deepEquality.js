@@ -29,10 +29,10 @@ const deepEquals = (apple, orange) => {
   // })
   // we cannot use forEach function here because there is no way to stop the loop using return key word
   // instead, a plain for loop is a better choise;
-  // for (let i = 0; i < appleLength; i++) {
-  //   let key = appleKeys[i];
-  //   if(!deepEquals(apple[key], orange[key])) return false;
-  // }
+  for (let i = 0; i < appleLength; i++) {
+    let key = appleKeys[i];
+    if(!deepEquals(apple[key], orange[key])) return false;
+  }
 
   return true;
 };
