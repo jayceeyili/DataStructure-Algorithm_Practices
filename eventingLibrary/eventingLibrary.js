@@ -35,7 +35,7 @@ const mixEvents = obj => {
 
   obj.trigger = (...args) => {
     if (events[args[0]]) {
-      events[args[0]].forEach(callback => callback.apply(obj, args.slice(1)));
+      events[args[0]].forEach(callback => callback(...args.slice(1)));
     }
   }
 
