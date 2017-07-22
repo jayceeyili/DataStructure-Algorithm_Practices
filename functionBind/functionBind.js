@@ -34,7 +34,15 @@
 //   }
 // };
 
-const bind = (...args1) => (...args2) => args1[0].apply(args1[1], [...args1.slice(2), ...args2]);
+const bind = (...args1) => {
+  let func = args1[0];
+  let context = args1[1];
+  let prevArgs = args1.slice(2);
+  return (...args2) => {
+    let arg = [...prevArgs, ...args2];
+    return func.apply(context, arg);
+  }
+};
 
 // var alice = {
 //   name: 'alice',
@@ -72,25 +80,36 @@ const bind = (...args1) => (...args2) => args1[0].apply(args1[1], [...args1.slic
  *
 */
 
-Function.prototype.bind = function(context) {
-  var prevArgs = Array.prototype.slice.call(arguments, 1);
-  var func = this;
+// Function.prototype.bind = function(context) {
+//   var prevArgs = Array.prototype.slice.call(arguments, 1);
+//   var func = this;
+//
+//   return function() {
+//     var args = Array.prototype.slice.call(arguments);
+//     args = prevArgs.concat(args);
+//
+//     return func.apply(context, args);
+//   }
+// };
 
-  return function() {
-    var args = Array.prototype.slice.call(arguments);
-    args = prevArgs.concat(args);
+Function.prototype.bind = function(...args1) {
+  let func = this;
+  let context = args1[0];
+  let prevArgs = args1.slice(1);
 
+  return function(...args2) {
+    let args = [...prevArgs, ...args2];
     return func.apply(context, args);
   }
 };
 
-var alice = {
-  name: 'alice',
-  shout: function(){
-    console.log(this.name);
-  }
-}
-var boundShout = alice.shout.bind(alice);
-boundShout(); // alerts 'alice'
-boundShout = alice.shout.bind({name: 'bob'});
-boundShout(); // alerts 'bob'
+// var alice = {
+//   name: 'alice',
+//   shout: function(){
+//     console.log(this.name);
+//   }
+// }
+// var boundShout = alice.shout.bind(alice);
+// boundShout(); // alerts 'alice'
+// boundShout = alice.shout.bind({name: 'bob'});
+// boundShout(); // alerts 'bob'
