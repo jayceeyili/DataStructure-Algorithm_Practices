@@ -20,49 +20,109 @@ var makeHashTable = function() {
   var result = {};
   var storage = [];
   var storageLimit = 1000;
-  result.insert = function(key, value) {
-    let index = getIndexBelowMaxForKey(key, storageLimit);
+  result.insert = function(/*...*/  key, value ) {
+    // TODO: implement `insert()`
+
+
+    var index = getIndexBelowMaxForKey(key, storageLimit);
     storage[index] = storage[index] || [];
-
-    let pairs = storage[index];
-    let replaced = false;
-
-    pairs.forEach(pair => {
+    var pairs = storage[index];
+    var pair;
+    var replaced = false;
+    for (var i = 0; i < pairs.length; i++) {
+      pair = pairs[i];
       if (pair[0] === key) {
         pair[1] = value;
         replaced = true;
       }
-    })
+    }
 
     if (!replaced) {
       pairs.push([key, value]);
     }
-  };
+      };
 
-  result.retrieve = function(key) {
-    let index = getIndexBelowMaxForKey(key, storageLimit);
-    let pairs = storage[index];
-    if (!pairs) return;
-    for (let i = 0; i < pairs.length; i++) {
-      let pair = pairs[i];
+  result.retrieve = function(/*...*/  key ) {
+    // TODO: implement `retrieve()`
+
+    var index = getIndexBelowMaxForKey(key, storageLimit);
+    var pairs = storage[index];
+    if (!pairs) { return; }
+    var pair;
+    for (var i = 0; i < pairs.length; i++) {
+      pair = pairs[i];
       if (pair && pair[0] === key) {
         return pair[1];
       }
     }
-  };
+      };
 
-  result.remove = function(key) {
-    let index = getIndexBelowMaxForKey(key, storageLimit);
-    let pairs = storage[index];
-    for (let i = 0; i < pairs.length; i++) {
-      let pair = pairs[i];
+  result.remove = function(/*...*/  key ) {
+    // TODO: implement `remove()`
+
+    var index = getIndexBelowMaxForKey(key, storageLimit);
+    var pairs = storage[index];
+    var pair;
+    for (var i = 0; i < pairs.length; i++) {
+      pair = pairs[i];
       if (pair[0] === key) {
-        let value = pair[1];
+        var value = pair[1];
         delete pairs[i];
         return value;
       }
     }
-  };
+      };
 
   return result;
 };
+
+// var makeHashTable = function() {
+//   var result = {};
+//   var storage = [];
+//   var storageLimit = 1000;
+//   result.insert = function(key, value) {
+//     let index = getIndexBelowMaxForKey(key, storageLimit);
+//     storage[index] = storage[index] || [];
+//
+//     let pairs = storage[index];
+//     let replaced = false;
+//
+//     pairs.forEach(pair => {
+//       if (pair[0] === key) {
+//         pair[1] = value;
+//         replaced = true;
+//       }
+//     })
+//
+//     if (!replaced) {
+//       pairs.push([key, value]);
+//     }
+//   };
+//
+//   result.retrieve = function(key) {
+//     let index = getIndexBelowMaxForKey(key, storageLimit);
+//     let pairs = storage[index];
+//     if (!pairs) return;
+//     for (let i = 0; i < pairs.length; i++) {
+//       let pair = pairs[i];
+//       if (pair && pair[0] === key) {
+//         return pair[1];
+//       }
+//     }
+//   };
+//
+//   result.remove = function(key) {
+//     let index = getIndexBelowMaxForKey(key, storageLimit);
+//     let pairs = storage[index];
+//     for (let i = 0; i < pairs.length; i++) {
+//       let pair = pairs[i];
+//       if (pair[0] === key) {
+//         let value = pair[1];
+//         delete pairs[i];
+//         return value;
+//       }
+//     }
+//   };
+//
+//   return result;
+// };
