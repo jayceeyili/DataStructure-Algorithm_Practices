@@ -25,20 +25,79 @@ var makeHashTable = function() {
   var storage = [];
   var storageLimit = 4;
   var size = 0;
-  
-  result.insert = function(/*...*/ 
-) {
-    // TODO: implement `insert`
+
+  let resizing = false;
+
+  let resize = newSize => {
+    if (!resizing) {
+      resizing = true;
+      let pairs = [];
+      for (let i = 0; i < storage.length; i++) {
+        if (!storage[i]) continue;
+        for (let k = 0; k < storage[i].length; k++) {
+          if (!storage[i][k]) continue;
+          pairs.push(storage[i][k]);
+        }
+      }
+      storageLimit = newSize;
+      storage = [];
+      size = 0;
+      for (let j = 0; j < pairs.length; j++) {
+        result.insert(pairs[j][0], pairs[j][1]);
+      }
+      resizing = false;
+    }
   };
 
-  result.retrieve = function(/*...*/ 
-) {
-    // TODO: implement `retrieve`
+  result.insert = function(key, value) {
+    let index = getIndexBelowMaxForKey(key, storageLimit);
+    storage[index] = storage[index] || [];
+    let pairs = storage[index];
+    let replaced = false;
+    for (let i = 0; i < pairs.length; i++) {
+      let pair = pairs[i];
+      if (pair[0] === key) {
+        pair[1] = value;
+        replaced = true;
+      }
+    }
+
+    if (!replaced) {
+      pairs.push([key, value]);
+      size++;
+    }
+    if (size >= storageLimit * 0.75) {
+      resize(storageLimit * 2);
+    }
   };
 
-  result.remove = function(/*...*/ 
-) {
-    // TODO: implement `remove`
+  result.retrieve = function(key) {
+    let index = getIndexBelowMaxForKey(key, storageLimit);
+    let pairs = storage[index];
+    if (!pairs) return;
+    for (let i = 0; i < pairs.length; i++) {
+      let pair = pairs[i];
+      if (pair && pair[0] === key) {
+        return pair[1];
+      }
+    }
+  };
+
+  result.remove = function(key) {
+    let index = getIndexBelowMaxForKey(key, storageLimit);
+    let pairs = storage[index];
+    for (let i = 0; i < pairs.length; i++) {
+      let pair = pairs[i];
+      if (pair[0] === key) {
+        let value = pair[1];
+        delete pairs[i];
+        size--;
+        if (size <= storageLimit * 0.25) {
+          resize(storageLimit / 2);
+        }
+        return value;
+      }
+    }
   };
 
   return result;

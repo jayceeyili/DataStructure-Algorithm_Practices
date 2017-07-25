@@ -11,7 +11,7 @@ describe("hashTableResizing", function() {
     expect(hashTable.retrieve("firstName")).to.be.equal("Bob");
 
     hashTable.remove("firstName");
-    expect(hashTable.retrieve("firstName")).to.be.equal(null);
+    expect(hashTable.retrieve("firstName")).to.be.equal(undefined);
   });
 
   it("should resize when greater than 3 / 4 and less than 1 / 4 capacity", function() {
@@ -28,6 +28,6 @@ describe("hashTableResizing", function() {
     hashTable.remove("lastName");
     hashTable.remove("dog");
     hashTable.remove("cat");
-    expect(hashTable.retrieve("firstName")).to.be.equal(null);
+    expect(hashTable.retrieve("firstName")).to.be.equal(undefined);
   });
 });

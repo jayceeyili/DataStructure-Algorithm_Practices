@@ -11,6 +11,6 @@ describe("hashTable", function() {
     expect(hashTable.retrieve("firstName")).to.be.equal("Bob");
 
     hashTable.remove("firstName");
-    expect(hashTable.retrieve("firstName")).to.be.equal(null);
+    expect(hashTable.retrieve("firstName")).to.be.equal(undefined);
   });
 });
