@@ -21,22 +21,29 @@
  * Extra credit: Make the method work for arrays that contain objects and/or arrays as elements.
 */
 
+// Array.prototype.isSubsetOf = function (arr) {
+//   let originalCountMap = this.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
+//   let originalCountMapKeys = Object.keys(originalCountMap);
+//   let targetCountMap = arr.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
+//   let targetCountMapKeys = Object.keys(targetCountMap);
+//   for (let i = 0; i < originalCountMapKeys.length; i++) {
+//     let currentKey = originalCountMapKeys[i];
+//     if (targetCountMapKeys.indexOf(currentKey) === -1) {
+//       return false;
+//     }
+//   }
+//
+//   return true;
+// };
 Array.prototype.isSubsetOf = function (arr) {
-  let originalCountMap = this.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
-  let originalCountMapKeys = Object.keys(originalCountMap);
-  let targetCountMap = arr.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
-  let targetCountMapKeys = Object.keys(targetCountMap);
-  for (let i = 0; i < originalCountMapKeys.length; i++) {
-    let currentKey = originalCountMapKeys[i];
-    if (targetCountMapKeys.indexOf(currentKey) === -1) {
-      return false;
-    }
+  const obj = arr.reduce((a, b) => {a[b]++ ? 0 : a[b] = 1; return a}, {});
+  for (let i = 0; i < this.length; i++) {
+    if (!obj[this[i]]) return false;
   }
-
   return true;
 };
 
 
-var b = ['merge','reset','reset']
-
-console.log(b.isSubsetOf(['reset','merge','add','commit'])); // true
+// var b = ['merge','reset','reset']
+//
+// console.log(b.isSubsetOf(['reset','merge','add','commit'])); // true
