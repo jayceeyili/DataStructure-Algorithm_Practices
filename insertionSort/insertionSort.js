@@ -38,25 +38,33 @@
 var testingTransform = function(array) {
   var transform = [];
 
-  for (var i = 0; i < array.length; i++) {
-    transform.push({value: array[i], i: i});
+  for (var j = 0; j < array.length; j++) {
+    transform.push({value: array[j], j: j});
   }
 
   return transform;
 };
 
-const insertionSort = (array, comparator = function(a, b) {return a < b ? -1 : 0}) => {
-  array.forEach((ele, i) => {
+const insertionSort = (array, comparator) => {
+  if (!comparator) {
+    comparator = (a, b) => a < b ? -1 : 0;
+  }
+
+  for (let i = 1; i < array.length; i++) {
+    let val = array[i];
     let hole = i;
-    while (hole > 0 && comparator(ele.value, array[hole -1].value) === -1) {
+    let isObject = val instanceof Object;
+    let comparatorResult = isObject ? comparator(val.value, array[hole - 1].value) : comparator(val, array[hole - 1]);
+    while (hole > 0 && (comparatorResult === -1)) {
       array[hole] = array[hole - 1];
       hole--;
     }
 
-    array[hole] = ele;
-  })
+    array[hole] = val;
+  }
 
   return array;
 };
 
 // console.log(insertionSort([{value: 2}, {value: 1}, {value: 3}]));
+// console.log(insertionSort([2, 1, 3]));
