@@ -36,5 +36,4 @@ const binarySearch = (array, target) => {
   return find(0, array.length);
 };
 
-// var index = binarySearch([1, 2, 3, 4, 5], 4);
-// console.log(index);
+console.log(binarySearch([1,2,3,4,5], 4));

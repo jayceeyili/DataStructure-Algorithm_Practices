@@ -30,5 +30,34 @@
 
 
 
-var jsonpRequest = function(url, callback) {
+// var jsonpRequest = function(url, callback) {
+// };
+let jsonDispatcher = {};
+
+const jsonpRequest = (url, callback) => {
+  let key = Math.random();
+
+  jsonDispatcher[key] = (...args) => {
+    callback(...args);
+    delete jsonDispatcher[key];
+  };
+  // jsonDispatcher[key] = (...args) => {
+  //   callback.apply(this, args);
+  //   delete jsonDispatcher[key];
+  // }
+
+  let script = document.createElement('script');
+  script.src = `${url}?callback=jsonDispatcher[${key}]`;
+
+  document.body.append(script);
 };
+
+jsonpRequest('http://toy-problems.hackreactor.com:3003/jsonparty', function (data) {
+  console.log(data.response); // "Aw yeah, now we're JSONPartying"
+  console.log(data.random); // 3558
+});
+
+// Subsequent requests should have properly random responses:
+jsonpRequest('http://toy-problems.hackreactor.com:3003/jsonparty', function (data) {
+  console.log(data.random); // 1733
+});
